@@ -51,3 +51,7 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 
 	http.Redirect(w, r, "/", returnStatus)
 }
+
+func Edit(w http.ResponseWriter, r *http.Request) {
+	templates.ExecuteTemplate(w, "Edit", nil)
+}
