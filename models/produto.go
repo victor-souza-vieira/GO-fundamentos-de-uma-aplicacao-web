@@ -42,3 +42,14 @@ func BuscaTodosOsProdutos() []Produto {
 	defer db.Close()
 	return produtos
 }
+
+func CriarNovoProduto(nome string, descricao string, preco float64, quantidade int) {
+	produto := Produto{}
+	produto.Nome = nome
+	produto.Descricao = descricao
+	produto.Preco = preco
+	produto.Quantidade = quantidade
+
+	db := db.ConectaComBancoDeDados()
+	defer db.Close()
+}
