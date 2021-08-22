@@ -9,6 +9,8 @@ import (
 	"victor.com/module/models"
 )
 
+const returnStatus = 301
+
 var templates = template.Must(template.ParseGlob("templates/*.html"))
 
 func Index(w http.ResponseWriter, r *http.Request) {
@@ -40,12 +42,12 @@ func Insert(w http.ResponseWriter, r *http.Request) {
 		models.CriarNovoProduto(nome, descricao, precoConvertido, quantidadeConvertida)
 
 	}
-	http.Redirect(w, r, "/", 301)
+	http.Redirect(w, r, "/", returnStatus)
 }
 
 func Delete(w http.ResponseWriter, r *http.Request) {
 	idProduto := r.URL.Query().Get("id")
 	models.DeletaProduto(idProduto)
 
-	http.Redirect(w, r, "/", 200)
+	http.Redirect(w, r, "/", returnStatus)
 }
