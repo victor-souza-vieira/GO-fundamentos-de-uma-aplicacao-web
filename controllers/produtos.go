@@ -40,5 +40,5 @@ func Insert(w http.ResponseWriter, r *http.Request) {
 		models.CriarNovoProduto(nome, descricao, precoConvertido, quantidadeConvertida)
 
 	}
-	http.Redirect(w, r, "/", 201)
+	http.Redirect(w, r, "/", 301)
 }
