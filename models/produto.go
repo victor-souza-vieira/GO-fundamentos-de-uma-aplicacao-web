@@ -95,7 +95,7 @@ func EditaProduto(idProduto string) Produto {
 	return produtoParaAtualizar
 }
 
-func UpdateProduto(id string, nome string, descricao string, preco string, quantidade string) {
+func AtualizaProduto(id int, nome string, descricao string, preco float64, quantidade int) {
 	db := db.ConectaComBancoDeDados()
 	defer db.Close()
 

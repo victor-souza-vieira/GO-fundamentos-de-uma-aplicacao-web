@@ -3,6 +3,7 @@ package controllers
 import (
 	"fmt"
 	"html/template"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -62,13 +63,22 @@ func Update(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method == "POST" {
 
-		id := r.URL.Query().Get("id")
-		nome := r.URL.Query().Get("nome")
-		descricao := r.URL.Query().Get("descricao")
-		preco := r.URL.Query().Get("preco")
-		quantidade := r.URL.Query().Get("quantidade")
+		nome := r.FormValue("nome")
+		descricao := r.FormValue("descricao")
+		id, err := strconv.Atoi(r.FormValue("id"))
+		if err != nil {
+			log.Println("Erro ao converter o ID:", err)
+		}
+		preco, err := strconv.ParseFloat(r.FormValue("preco"), 64)
+		if err != nil {
+			log.Println("Erro ao converter o preço:", err)
+		}
+		quantidade, err := strconv.Atoi(r.FormValue("quantidade"))
+		if err != nil {
+			log.Println("Erro ao converter a quantidade:", err)
+		}
 
-		models.UpdateProduto(id, nome, descricao, preco, quantidade)
+		models.AtualizaProduto(id, nome, descricao, preco, quantidade)
 	}
 	http.Redirect(w, r, "/", returnStatus)
 }
