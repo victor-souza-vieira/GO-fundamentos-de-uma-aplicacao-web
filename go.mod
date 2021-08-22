@@ -1,4 +1,4 @@
-module example.com/module
+module victor.com/module
 
 go 1.17
 
