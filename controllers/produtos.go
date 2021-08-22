@@ -57,3 +57,18 @@ func Edit(w http.ResponseWriter, r *http.Request) {
 	produto := models.EditaProduto(idProduto)
 	templates.ExecuteTemplate(w, "Edit", produto)
 }
+
+func Update(w http.ResponseWriter, r *http.Request) {
+
+	if r.Method == "POST" {
+
+		id := r.URL.Query().Get("id")
+		nome := r.URL.Query().Get("nome")
+		descricao := r.URL.Query().Get("descricao")
+		preco := r.URL.Query().Get("preco")
+		quantidade := r.URL.Query().Get("quantidade")
+
+		models.UpdateProduto(id, nome, descricao, preco, quantidade)
+	}
+	http.Redirect(w, r, "/", returnStatus)
+}

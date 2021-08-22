@@ -94,3 +94,15 @@ func EditaProduto(idProduto string) Produto {
 	}
 	return produtoParaAtualizar
 }
+
+func UpdateProduto(id string, nome string, descricao string, preco string, quantidade string) {
+	db := db.ConectaComBancoDeDados()
+	defer db.Close()
+
+	atualizaDadosProduto, err := db.Prepare("update produtos set nome=?, descricao=?, preco=?, quantidade=? where id=?")
+	if err != nil {
+		panic(err.Error())
+	}
+
+	atualizaDadosProduto.Exec(nome, descricao, preco, quantidade, id)
+}
